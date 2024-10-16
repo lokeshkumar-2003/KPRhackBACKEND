@@ -1,0 +1,22 @@
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const DBConnection = require("./dbconfig/dbsConnection");
+const AuthRouter = require("./Router/AuthRouters/AuthRoute.js");
+const ProfileRouter = require("./Router/ProfileRouters/ProfileRoute.js");
+const PropertyRouter = require("./Router/PropertiesRouters/PropertyRoute.js");
+require("dotenv").config();
+
+app.use(express.json());
+app.use(cors());
+
+// Use API routes
+app.use("/api", AuthRouter);
+app.use("/api", ProfileRouter);
+app.use("/api", PropertyRouter);
+
+// Start the server
+app.listen(process.env.PORT, () => {
+  DBConnection();
+  console.log(`Server running on port ${process.env.PORT}`);
+});
