@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 const {
   createProperty,
-} = require("../../controllers/PropertyControllers/AddProperty.js");
+} = require("../../controllers/AdminControllers/PropertyControllers/AddProperty.js");
 const {
   editProperty,
-} = require("../../controllers/PropertyControllers/EditProperty.js");
+} = require("../../controllers/AdminControllers/PropertyControllers/EditProperty.js");
 
-router.post("/property/:userId", createProperty);
-router.put("/property/:userId/:propertyId", editProperty);
+router.post("/property", createProperty);
+router.put("/property/:propertyId", editProperty);
 
 module.exports = router;

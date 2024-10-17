@@ -1,4 +1,4 @@
-const Property = require("../../model/Property.js");
+const Property = require("../../../model/Property.js");
 
 module.exports.AllProperty = async (req, res) => {
   try {

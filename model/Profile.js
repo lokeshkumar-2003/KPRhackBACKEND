@@ -21,21 +21,21 @@ const profileSchema = new mongoose.Schema({
   savedSearches: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Search", // Refers to the Search model
+      ref: "Search",
       default: null,
     },
   ],
   bookMarks: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Property", // Refers to the Property model
+      ref: "Property",
       default: null,
     },
   ],
   listedProperties: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Property", // Refers to the Property model
+      ref: "Property",
       default: null,
     },
   ],
@@ -53,7 +53,6 @@ const profileSchema = new mongoose.Schema({
   },
 });
 
-// Middleware to update `updatedAt` field before saving
 profileSchema.pre("save", function (next) {
   this.updatedAt = Date.now();
   next();

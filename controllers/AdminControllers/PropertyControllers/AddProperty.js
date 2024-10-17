@@ -1,10 +1,7 @@
-const Property = require("../../model/Property.js");
+const Property = require("../../../model/Property.js");
 
 module.exports.createProperty = async (req, res) => {
   try {
-    const { sellerId } = req.body;
-
-    // Extract property details from the request body
     const {
       title,
       description,
@@ -19,16 +16,9 @@ module.exports.createProperty = async (req, res) => {
       additionalAttributes,
     } = req.body;
 
-    // Validate required fields
-    if (
-      !title ||
-      !description ||
-      !price ||
-      !location ||
-      !type ||
-      !squareFootage ||
-      !yearBuild
-    ) {
+    console.log(req.body);
+
+    if (!title || !description || !price || !location || !type) {
       return res
         .status(400)
         .json({ message: "All fields are required", success: false });
@@ -36,13 +26,12 @@ module.exports.createProperty = async (req, res) => {
 
     // Create a new property
     const newProperty = new Property({
-      sellerId,
       title,
       description,
       price,
       location,
       type,
-      features, // Add features directly
+      features,
       squareFootage,
       yearBuild,
       amenities,
