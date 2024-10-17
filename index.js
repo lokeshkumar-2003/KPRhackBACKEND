@@ -9,6 +9,7 @@ const FilterRouter = require("./Router/FilterRouters/FilterRouters.js");
 const MatricsRouter = require("./Router/MetricsRouters/MetricsRouters.js");
 const CommentRouter = require("./Router/CommantRouter/CommentRouter.js");
 const BuyedRouter = require("./Router/PurchaseRouters/BuyedRouter.js");
+const TableRouter = require("./Router/TableRoutes/TableRoute.js");
 require("dotenv").config();
 
 app.use(express.json());
@@ -22,6 +23,7 @@ app.use("/api", FilterRouter);
 app.use("/api", MatricsRouter);
 app.use("/api", CommentRouter);
 app.use("/api", BuyedRouter);
+app.use("/api", TableRouter);
 
 // Start the server
 app.listen(process.env.PORT, () => {
