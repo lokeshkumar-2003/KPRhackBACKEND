@@ -118,3 +118,17 @@ no feed
 
 just userId and propertyId is enough
 
+======================================================================================
+
+Admin panel
+
+matrics
+
+Doughnet Chart
+
+get http://localhost:2012/api/analysis/pieChart
+
+BarChart
+
+get http://localhost:2012/api/analysis/BarChart
+
