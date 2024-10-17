@@ -32,7 +32,7 @@ const profileSchema = new mongoose.Schema({
       default: null,
     },
   ],
-  listedProperties: [
+  buyedProperties: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Property",

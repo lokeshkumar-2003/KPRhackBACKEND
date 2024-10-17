@@ -1,0 +1,120 @@
+authentication:
+
+http://localhost:2012/api/auth/register
+http://localhost:2012/api/auth/login
+
+To be Feed:
+
+register
+{
+  username: "",
+  email : "",
+  password: "",
+}
+
+login
+{
+  email:"",
+  password:""
+}
+
+================================
+
+Profile
+
+post http://localhost:2012/api/profile/:userId
+get http://localhost:2012/api/profile/:userId //get single profile
+put http://localhost:2012/api/profile/:userId //edit
+
+
+to feed: 
+ {
+  profilePicture,
+  phone,
+  address,
+  notificationPreferences: { emailNotifications, smsNotifications }
+  }
+
+================================
+
+Property:
+
+post http://localhost:2012/api/Property
+put http://localhost:2012/api/Property/:propertyId // edit
+
+
+to feed:
+{
+  {
+    "title": "Cozy Cottage",
+    "description": "A quaint cottage by the lake.",
+    "price": 200000,
+    "location": {
+      "type": "Point",
+      "coordinates": [-78.123456, 38.123456],
+      "locationName": "Lakeview",
+      "locationAddress": "111 Lake Rd, Lakeview, VA 24523"
+    },
+    "type": "House",
+    "features": {
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "units": 1,
+      "elevators": 0,
+      "landArea": 4000,
+      "zoningType": "Residential",
+      "rooms": 5,
+      "conferenceRoom": false,
+      "parkingSpots": 1
+    },
+    "comments": [],
+    "squareFootage": 1200,
+    "yearBuild": 2010,
+    "amenities": ["Fireplace", "Deck", "Lake Access"],
+    "status": "available",
+    "images": ["cottage1.jpg", "cottage2.jpg"],
+    "additionalAttributes": {
+      "heating": "Electric",
+      "cooling": "Window Units"
+    }
+  }
+}
+
+================================
+
+post http://localhost:2012/api/property/filter
+
+to feed:
+
+{
+  location:
+  propertyType,
+  price:{
+    min:
+    max:
+  }
+  features:
+}
+
+================================
+
+post http://localhost:2012/api/property/comments/:propertyId/:userId
+
+{
+  comment:
+}
+
+
+delete http://localhost:2012/api/property/comments/:propertyId/:commentId
+
+
+================================
+
+purchased
+
+post http://localhost:2012/api/property/buy/:userId/:propertyId
+
+no feed
+
+just userId and propertyId is enough
+
