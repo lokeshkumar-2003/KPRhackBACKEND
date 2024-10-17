@@ -39,9 +39,11 @@ to feed:
 
 Property:
 
-post http://localhost:2012/api/Property
+post http://localhost:2012/api/Property // add
+get http://localhost:2012/api/Property/:propertyId // get single property
 put http://localhost:2012/api/Property/:propertyId // edit
-
+get http://localhost:2012/api/Properties // all 
+delete http://localhost:2012/api/Property/:propertyId // delete
 
 to feed:
 {
@@ -132,3 +134,10 @@ BarChart
 
 get http://localhost:2012/api/analysis/BarChart
 
+User Table
+
+get http://localhost:2012/api/table/users
+
+Transactions Table
+
+post http://localhost:2012/api/table/transactions
