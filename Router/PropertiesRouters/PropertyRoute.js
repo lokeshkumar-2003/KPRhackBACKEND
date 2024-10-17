@@ -6,7 +6,6 @@ const {
 const {
   editProperty,
 } = require("../../controllers/AdminControllers/PropertyControllers/EditProperty.js");
-
 router.post("/property", createProperty);
 router.put("/property/:propertyId", editProperty);
 

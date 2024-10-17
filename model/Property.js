@@ -1,5 +1,14 @@
 const mongoose = require("mongoose");
 
+const commentSchema = new mongoose.Schema(
+  {
+    userName: { type: String, required: true },
+    profilePicture: { type: String, required: true },
+    comment: { type: String, required: true },
+  },
+  { timestamps: true }
+); // Optional: add timestamps for when comments are created/updated
+
 const propertySchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
@@ -23,29 +32,17 @@ const propertySchema = new mongoose.Schema({
     enum: ["Complex", "House", "Land", "Office"],
   },
   features: {
-    bedrooms: { type: Number, required: false }, // For House
-    bathrooms: { type: Number, required: false }, // For House
-    units: { type: Number, required: false }, // For Complex
-    elevators: { type: Number, required: false }, // For Complex
-    landArea: { type: Number, required: false }, // For Land
-    zoningType: { type: String, required: false }, // For Land
-    rooms: { type: Number, required: false }, // For Office
-    conferenceRoom: { type: Boolean, required: false }, // For Office
-    parkingSpots: { type: Number, required: false }, // For all types if applicable
+    bedrooms: { type: Number, required: false },
+    bathrooms: { type: Number, required: false },
+    units: { type: Number, required: false },
+    elevators: { type: Number, required: false },
+    landArea: { type: Number, required: false },
+    zoningType: { type: String, required: false },
+    rooms: { type: Number, required: false },
+    conferenceRoom: { type: Boolean, required: false },
+    parkingSpots: { type: Number, required: false },
   },
-  comments: [
-    {
-      userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
-      text: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: false,
-      },
-    },
-  ],
+  comments: [commentSchema], // Use the defined comment schema
   squareFootage: { type: Number, required: true },
   yearBuild: { type: Number, required: false },
   amenities: { type: [String], default: [] },
