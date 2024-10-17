@@ -35,7 +35,7 @@ const adminSchema = new mongoose.Schema({
       ref: "Property",
     },
   ],
-  verificationRequests: [
+  intrestedProperty: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Property",

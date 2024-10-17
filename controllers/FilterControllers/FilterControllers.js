@@ -1,44 +1,40 @@
 const Properties = require("../../model/Property.js");
-const Profile = require("../../model/Profile.js");
 
 module.exports.FilterProperty = async (req, res) => {
   try {
-    const properties = await Properties.find();
+    const { location, propertyType, price = {}, features = {} } = req.body;
 
-    let filteredProperties = [];
+    const { min = 0, max = Infinity } = price;
 
-    const {
-      location,
-      propertyType,
-      price: { min, max },
-      features,
-    } = req.body;
+    const query = {
+      ...(propertyType && { type: propertyType }),
+      ...(location && { "location.locationName": location }),
+      price: { $gte: min, $lte: max }, // Price range condition
+    };
 
-    properties.forEach((property) => {
-      if (property.type === propertyType) {
-        if (location === property.location.locationName) {
-          if (min <= property.price && max >= property.price) {
-            let featureMatch = true;
-            for (const feature in features) {
-              if (
-                features[feature] !== undefined &&
-                features[feature] !== null
-              ) {
-                if (property.features[feature] !== features[feature]) {
-                  featureMatch = false;
-                  break;
-                }
-              }
-            }
+    // Fetch properties that match the query
+    const properties = await Properties.find(query);
 
-            if (featureMatch) {
-              filteredProperties.push(property);
-            }
-          }
+    // Filter properties based on features (done in-memory)
+    const filteredProperties = properties.filter((property) => {
+      let featureMatch = true;
+
+      // Check for matching features
+      for (const feature in features) {
+        if (
+          features[feature] !== undefined &&
+          features[feature] !== null &&
+          property.features[feature] !== features[feature]
+        ) {
+          featureMatch = false;
+          break;
         }
       }
+
+      return featureMatch;
     });
 
+    // Return filtered properties
     return res.status(200).json({
       message: "Data retrieved successfully",
       filteredProperties,

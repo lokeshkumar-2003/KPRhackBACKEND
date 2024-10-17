@@ -16,8 +16,6 @@ module.exports.createProperty = async (req, res) => {
       additionalAttributes,
     } = req.body;
 
-    console.log(req.body);
-
     if (!title || !description || !price || !location || !type) {
       return res
         .status(400)

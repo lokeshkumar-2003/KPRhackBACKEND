@@ -5,6 +5,8 @@ const DBConnection = require("./dbconfig/dbsConnection");
 const AuthRouter = require("./Router/AuthRouters/AuthRoute.js");
 const ProfileRouter = require("./Router/ProfileRouters/ProfileRoute.js");
 const PropertyRouter = require("./Router/PropertiesRouters/PropertyRoute.js");
+const FilterRouter = require("./Router/FilterRouters/FilterRouters.js");
+const MatricsRouter = require("./Router/MetricsRouters/MetricsRouters.js");
 require("dotenv").config();
 
 app.use(express.json());
@@ -14,6 +16,8 @@ app.use(cors());
 app.use("/api", AuthRouter);
 app.use("/api", ProfileRouter);
 app.use("/api", PropertyRouter);
+app.use("/api", FilterRouter);
+app.use("/api", MatricsRouter);
 
 // Start the server
 app.listen(process.env.PORT, () => {
