@@ -12,8 +12,6 @@ module.exports.AddProfile = async (req, res) => {
       notificationPreferences: { emailNotifications, smsNotifications },
     } = req.body;
 
-    console.log(emailNotifications, smsNotifications);
-
     const existUser = await User.findById(userId);
     if (!existUser) {
       return res.status(404).json({

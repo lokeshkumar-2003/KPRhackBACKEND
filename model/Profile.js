@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const profileSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "User", // Refers to the User model
     required: true,
   },
   profilePicture: {
@@ -12,33 +12,30 @@ const profileSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: false,
     trim: true,
   },
-
   address: {
     type: String,
-    required: false,
     trim: true,
   },
   savedSearches: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Search",
+      ref: "Search", // Refers to the Search model
       default: null,
     },
   ],
   bookMarks: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Property",
+      ref: "Property", // Refers to the Property model
       default: null,
     },
   ],
   listedProperties: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Property",
+      ref: "Property", // Refers to the Property model
       default: null,
     },
   ],
@@ -56,11 +53,13 @@ const profileSchema = new mongoose.Schema({
   },
 });
 
+// Middleware to update `updatedAt` field before saving
 profileSchema.pre("save", function (next) {
   this.updatedAt = Date.now();
   next();
 });
 
-const User = mongoose.model("Profile", profileSchema);
+// Export the Profile model
+const Profile = mongoose.model("Profile", profileSchema);
 
-module.exports = User;
+module.exports = Profile;

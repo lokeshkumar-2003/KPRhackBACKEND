@@ -27,7 +27,7 @@ module.exports.LoginUser = async (req, res, next) => {
 
     res.status(200).json({
       message: "Login successful.",
-      success: false,
+      success: true,
       user: { id: user._id, username: user.username, email: user.email },
     });
 

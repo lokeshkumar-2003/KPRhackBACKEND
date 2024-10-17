@@ -11,19 +11,46 @@ const propertySchema = new mongoose.Schema({
   price: { type: Number, required: true },
   location: {
     type: {
-      type: String, // 'Point' for 2D
+      type: String,
       enum: ["Point"],
       required: true,
     },
     coordinates: {
-      type: [Number], // [longitude, latitude]
+      type: [Number],
       required: true,
     },
     locationName: { type: String, required: true },
     locationAddress: { type: String, required: true },
   },
-  type: { type: String, required: true },
-  features: { type: [String], default: [] },
+  type: {
+    type: String,
+    required: true,
+    enum: ["Complex", "House", "Land", "Office"],
+  },
+  features: {
+    bedrooms: { type: Number, required: false }, // For House
+    bathrooms: { type: Number, required: false }, // For House
+    units: { type: Number, required: false }, // For Complex
+    elevators: { type: Number, required: false }, // For Complex
+    landArea: { type: Number, required: false }, // For Land
+    zoningType: { type: String, required: false }, // For Land
+    rooms: { type: Number, required: false }, // For Office
+    conferenceRoom: { type: Boolean, required: false }, // For Office
+    parkingSpots: { type: Number, required: false }, // For all types if applicable
+  },
+  comments: [
+    {
+      userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      text: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+      },
+    },
+  ],
   squareFootage: { type: Number, required: true },
   yearBuild: { type: Number, required: true },
   amenities: { type: [String], default: [] },
@@ -33,7 +60,6 @@ const propertySchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-// Create 2D index for GeoJSON location
 propertySchema.index({ location: "2dsphere" });
 
 module.exports = mongoose.model("Property", propertySchema);
