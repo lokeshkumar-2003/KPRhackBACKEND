@@ -44,7 +44,7 @@ get http://localhost:2012/api/Property/:propertyId // get single property
 put http://localhost:2012/api/Property/:propertyId // edit
 get http://localhost:2012/api/Properties // all 
 delete http://localhost:2012/api/Property/:propertyId // delete
-
+ 
 to feed:
 {
   {

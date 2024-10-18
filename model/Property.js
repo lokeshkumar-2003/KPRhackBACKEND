@@ -42,7 +42,7 @@ const propertySchema = new mongoose.Schema({
     conferenceRoom: { type: Boolean, required: false },
     parkingSpots: { type: Number, required: false },
   },
-  comments: [commentSchema], // Use the defined comment schema
+  comments: [commentSchema],
   squareFootage: { type: Number, required: true },
   yearBuild: { type: Number, required: false },
   amenities: { type: [String], default: [] },

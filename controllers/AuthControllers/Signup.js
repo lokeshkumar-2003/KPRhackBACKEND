@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 module.exports.Register = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
+    console.log(req.body);
 
     // Validate input
     if (!username || !email || !password) {
